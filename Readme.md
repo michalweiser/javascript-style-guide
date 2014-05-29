@@ -1,19 +1,19 @@
-# Node.js Style Guide
+# JavaScript Style Guide
 
 This is a guide for writing consistent and aesthetically pleasing node.js code.
 It is inspired by what is popular within the community, and flavored with some
 personal opinions.
 
-This guide was created by [Felix Geisendörfer](http://felixge.de/) and is
+This guide was created by [Felix Geisendörfer](http://felixge.de/), edited by Michał Weiser and is
 licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 license. You are encouraged to fork this repository and make adjustments
 according to your preferences.
 
 ![Creative Commons License](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
-## 2 Spaces for indention
+## 4 Spaces for indention
 
-Use 2 spaces for indenting your code and swear an oath to never mix tabs and
+Use 4 spaces for indenting your code and swear an oath to never mix tabs and
 spaces - a special kind of hell is awaiting you otherwise.
 
 ## Newlines
@@ -26,6 +26,34 @@ of a file. Windows-style newlines (`\r\n`) are forbidden inside any repository.
 Just like you brush your teeth after every meal, you clean up any trailing
 whitespace in your JS files before committing. Otherwise the rotten smell of
 careless neglect will eventually drive away contributors and/or co-workers.
+
+## No trailing comma in objects
+
+Trailing comma at the end of object is problematic in some IE versions. Always
+remember not to write it after last object element. This small thing will save
+you a lot of future headaches caused by strange errors. 
+
+*Right:*
+
+```js
+var obj;
+
+obj = {
+    a: "a",
+    b: "b"
+};
+```
+
+*Wrong:*
+
+```js
+var obj;
+
+obj = {
+    a: "a",
+    b: "b",
+};
+```
 
 ## Use Semicolons
 
@@ -84,20 +112,26 @@ Also, notice the use of whitespace before and after the condition statement.
 
 ## Declare one variable per var statement
 
-Declare one variable per var statement, it makes it easier to re-order the
-lines. However, ignore [Crockford][crockfordconvention] when it comes to
-declaring variables deeper inside a function, just the declarations wherever
-they make sense.
+Declare one variable per var statement to follow the hoisting in JS.
+The best way according to my personal experience is to declare one
+variable at the top of function scope (C/C++ like style) without any
+initializations to prevent mixed line ordering. And afterwards initialize
+values wherever you want. This rule generates more code, but you should
+never end up with strange hoisitng problems.
 
 *Right:*
 
 ```js
-var keys   = ['foo', 'bar'];
-var values = [23, 42];
+var keys, values, object, key;
 
-var object = {};
+keys   = ['foo', 'bar'];
+values = [23, 42];
+
+object = {};
 while (keys.length) {
-  var key = keys.pop();
+  key;
+
+  key = keys.pop();
   object[key] = values.pop();
 }
 ```
@@ -106,54 +140,57 @@ while (keys.length) {
 
 ```js
 var keys = ['foo', 'bar'],
-    values = [23, 42],
-    object = {},
-    key;
+    values = [23, 42];
+
+var object = {};
 
 while (keys.length) {
-  key = keys.pop();
+  var key = keys.pop();
   object[key] = values.pop();
 }
 ```
 
-[crockfordconvention]: http://javascript.crockford.com/code.html
+## Naming conventions
 
-## Use lowerCamelCase for variables, properties and function names
-
-Variables, properties and function names should use `lowerCamelCase`.  They
-should also be descriptive. Single character variables and uncommon
-abbreviations should generally be avoided.
-
-*Right:*
+### Use lower_case_underscore convention for variables and properties
 
 ```js
-var adminUser = db.query('SELECT * FROM users ...');
+var my_string, b;
+my_string = 'hello';
+b = {
+    my_prop: 10
+};
 ```
 
-*Wrong:*
-
+### Use $ prefix in case of jQuery object variable
 ```js
-var admin_user = db.query('SELECT * FROM users ...');
+var $input_box;
+$input_box = jQuery('input.box');
 ```
-
-## Use UpperCamelCase for class names
-
-Class names should be capitalized using `UpperCamelCase`.
-
-*Right:*
-
+### Use lowerCamelCase for functions and methods
 ```js
-function BankAccount() {
-}
+var myFunction, obj;
+
+myFunction = function () {
+  return 'function';
+};
+
+obj = {
+    myMethod: function () {
+        return 'method';
+    }
+};
 ```
-
-*Wrong:*
-
+### Use UpperCamelCase for classes
 ```js
-function bank_Account() {
-}
-```
+var MyClass, a;
 
+MyClass = function () {
+  //constructor
+};
+
+a = new MyClass();
+```
 ## Use UPPERCASE for Constants
 
 Constants should be declared as regular variables or static class properties,
