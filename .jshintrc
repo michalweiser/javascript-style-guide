@@ -3,7 +3,7 @@
   "curly": true,
   "eqeqeq": true,
   "freeze": true,
-  "indent": 2,
+  "indent": 4,
   "newcap": true,
   "quotmark": "single",
   "maxdepth": 3,
