@@ -20,6 +20,7 @@ spaces - a special kind of hell is awaiting you otherwise.
 
 Use UNIX-style newlines (`\n`), and a newline character as the last character
 of a file. Windows-style newlines (`\r\n`) are forbidden inside any repository.
+Always leave one new line at the end of any file.
 
 ## No trailing whitespace
 
