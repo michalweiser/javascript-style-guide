@@ -440,26 +440,36 @@ setTimeout(function() {
 }, 1000);
 ```
 
-## Use slashes for comments
+## Use JSDoc comment style
 
-Use slashes for both single line and multi line comments. Try to write
-comments that explain higher level mechanisms or clarify difficult
-segments of your code. Don't use comments to restate trivial things.
+Use [JSDoc][usejsdoc] syntax to be able to generate your documentation.
+Try to write comments that explain higher level mechanisms or clarify
+difficult segments of your code. Don't use comments to restate trivial
+things.
 
 *Right:*
 
 ```js
-// 'ID_SOMETHING=VALUE' -> ['ID_SOMETHING=VALUE'', 'SOMETHING', 'VALUE']
-var matches = item.match(/ID_([^\n]+)=([^\n]+)/));
+/**
+ * 'ID_SOMETHING=VALUE' -> ['ID_SOMETHING=VALUE'', 'SOMETHING', 'VALUE']
+ * @type {Array}
+ */
+matches = item.match(/ID_([^\n]+)=([^\n]+)/));
 
-// This function has a nasty side effect where a failure to increment a
-// redis counter used for statistics will cause an exception. This needs
-// to be fixed in a later iteration.
-function loadUser(id, cb) {
+/**
+ * This function has a nasty side effect where a failure to increment a
+ * redis counter used for statistics will cause an exception. This needs
+ * to be fixed in a later iteration.
+ *
+ * @param {String}    id    user id
+ * @param {Function}  cb    custom callback function
+ * @return {Object}   loaded user object
+ */
+loadUser = function (id, cb) {
     // ...
 }
 
-var isSessionValid = (session.expires < Date.now());
+isSessionValid = (session.expires < Date.now());
 if (isSessionValid) {
     // ...
 }
@@ -483,6 +493,7 @@ if (isSessionValid) {
     // ...
 }
 ```
+[usejsdoc]: http://usejsdoc.org/
 
 ## Object.freeze, Object.preventExtensions, Object.seal, with, eval
 
