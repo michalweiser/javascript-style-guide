@@ -224,34 +224,49 @@ File.fullPermissions = 0777;
 
 ## Object / Array creation
 
-Use trailing commas and put *short* declarations on a single line. Only quote
-keys when your interpreter complains:
+Never use trailing commas! Always one line for every item. Try to avoid to use
+JavaScript reserved words as keys for object properties. If you need to use any
+of them for some reason, remember to *always* quote them. Try to avoid usage of
+space splited words as object property keys.
+
+JS reserved words based on [ECMA specifications][ecmadocs]:
+break, case, catch, continue, debugger, default, delete, do, else, finally, for,
+function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var,
+void, while, with, class, const, enum, export, extends, import, super, implements,
+interface, let, package, private, protected, public, static, yield
 
 *Right:*
 
 ```js
-var a = ['hello', 'world'];
-var b = {
-  good: 'code',
-  'is generally': 'pretty',
+var a, b;
+
+a = [
+    'hello',
+    'world'
+];
+
+b = {
+    good: 'code',
+    'is_generally': 'pretty',
 };
 ```
 
 *Wrong:*
 
 ```js
-var a = [
-  'hello', 'world'
-];
+var a = ['hello', 'world',];
 var b = {"good": 'code'
         , is generally: 'pretty'
         };
 ```
 
+[ecmadocs]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf
+
 ## Use the === operator
 
 Programming is not about remembering [stupid rules][comparisonoperators]. Use
-the triple equality operator as it will work just as expected.
+the triple equality operator as it will work just as expected. If you decide to
+use double equality operator always leave comment why you're doing it.
 
 *Right:*
 
@@ -274,28 +289,11 @@ if (a == '') {
 
 [comparisonoperators]: https://developer.mozilla.org/en/JavaScript/Reference/Operators/Comparison_Operators
 
-## Use multi-line ternary operator
-
-The ternary operator should not be used on a single line. Split it up into multiple lines instead.
-
-*Right:*
-
-```js
-var foo = (a === b)
-  ? 1
-  : 2;
-```
-
-*Wrong:*
-
-```js
-var foo = (a === b) ? 1 : 2;
-```
-
 ## Do not extend built-in prototypes
 
 Do not extend the prototype of native JavaScript objects. Your future self will
-be forever grateful.
+be forever grateful. The one and only reason to extend native objects is to provide
+missing functionality in older browsers ([polyfills][polyfillswiki]). 
 
 *Right:*
 
@@ -318,6 +316,8 @@ if (a.empty()) {
   console.log('losing');
 }
 ```
+
+[polyfillswiki]: http://en.wikipedia.org/wiki/Polyfill
 
 ## Use descriptive conditions
 
@@ -397,7 +397,8 @@ function isPercentage(val) {
 ## Name your closures
 
 Feel free to give your closures a name. It shows that you care about them, and
-will produce better stack traces, heap and cpu profiles.
+will produce better stack traces, heap and cpu profiles. Allowes you to simply
+grep your stack trace to find named function.
 
 *Right:*
 
