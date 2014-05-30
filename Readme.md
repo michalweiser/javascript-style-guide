@@ -79,13 +79,13 @@ Use single quotes, unless you are writing JSON.
 *Right:*
 
 ```js
-var foo = 'bar';
+foo = 'bar';
 ```
 
 *Wrong:*
 
 ```js
-var foo = "bar";
+foo = "bar";
 ```
 
 ## Opening braces go on the same line
@@ -96,7 +96,7 @@ Your opening braces go on the same line as the statement.
 
 ```js
 if (true) {
-  console.log('winning');
+    window.console.log('winning');
 }
 ```
 
@@ -105,7 +105,7 @@ if (true) {
 ```js
 if (true)
 {
-  console.log('losing');
+    window.console.log('losing');
 }
 ```
 
@@ -125,13 +125,18 @@ never end up with strange hoisting problems.
 ```js
 var keys, values, object, key;
 
-keys   = ['foo', 'bar'];
-values = [23, 42];
+keys   = [
+    'foo',
+    'bar'
+];
+
+values = [
+    23,
+    42
+];
 
 object = {};
 while (keys.length) {
-  key;
-
   key = keys.pop();
   object[key] = values.pop();
 }
@@ -173,7 +178,7 @@ $input_box = jQuery('input.box');
 var myFunction, obj;
 
 myFunction = function () {
-  return 'function';
+    return 'function';
 };
 
 obj = {
@@ -187,7 +192,7 @@ obj = {
 var MyClass, a;
 
 MyClass = function () {
-  //constructor
+    //constructor
 };
 
 a = new MyClass();
@@ -197,27 +202,29 @@ a = new MyClass();
 Constants should be declared as regular variables or static class properties,
 using all uppercase letters.
 
-Node.js / V8 actually supports mozilla's [const][const] extension, but
-unfortunately that cannot be applied to class members, nor is it part of any
-ECMA standard.
-
 *Right:*
 
 ```js
-var SECOND = 1 * 1000;
+var File, SECOND;
 
-function File() {
-}
+SECOND = 1 * 1000;
+
+File = function () {
+
+};
+
 File.FULL_PERMISSIONS = 0777;
 ```
 
 *Wrong:*
 
 ```js
-const SECOND = 1 * 1000;
+var second = 1 * 1000;
 
 function File() {
-}
+
+};
+
 File.fullPermissions = 0777;
 ```
 
@@ -272,9 +279,12 @@ use double equality operator always leave comment why you're doing it.
 *Right:*
 
 ```js
-var a = 0;
+var a;
+
+a = 0;
+
 if (a !== '') {
-  console.log('winning');
+    window.console.log('winning');
 }
 
 ```
@@ -283,8 +293,9 @@ if (a !== '') {
 
 ```js
 var a = 0;
+
 if (a == '') {
-  console.log('losing');
+    window.console.log('losing');
 }
 ```
 
@@ -299,9 +310,12 @@ missing functionality in older browsers ([polyfills][polyfillswiki]).
 *Right:*
 
 ```js
-var a = [];
+var a;
+
+a = [];
+
 if (!a.length) {
-  console.log('winning');
+    window.console.log('winning');
 }
 ```
 
@@ -309,12 +323,13 @@ if (!a.length) {
 
 ```js
 Array.prototype.empty = function() {
-  return !this.length;
+    return !this.length;
 }
 
 var a = [];
+
 if (a.empty()) {
-  console.log('losing');
+    window.console.log('losing');
 }
 ```
 
@@ -327,10 +342,12 @@ Any non-trivial conditions should be assigned to a descriptively named variable 
 *Right:*
 
 ```js
-var isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
+var isValidPassword;
+
+isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
 
 if (isValidPassword) {
-  console.log('winning');
+    window.console.log('winning');
 }
 ```
 
@@ -338,7 +355,7 @@ if (isValidPassword) {
 
 ```js
 if (password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
-  console.log('losing');
+    window.console.log('losing');
 }
 ```
 
@@ -357,15 +374,15 @@ as possible.
 
 ```js
 function isPercentage(val) {
-  if (val < 0) {
-    return false;
-  }
+    if (val < 0) {
+        return false;
+    }
 
-  if (val > 100) {
-    return false;
-  }
+    if (val > 100) {
+        return false;
+    }
 
-  return true;
+    return true;
 }
 ```
 
@@ -373,15 +390,15 @@ function isPercentage(val) {
 
 ```js
 function isPercentage(val) {
-  if (val >= 0) {
-    if (val < 100) {
-      return true;
+    if (val >= 0) {
+        if (val < 100) {
+            return true;
+        } else {
+            return false;
+        }
     } else {
-      return false;
+        return false;
     }
-  } else {
-    return false;
-  }
 }
 ```
 
@@ -390,8 +407,8 @@ further:
 
 ```js
 function isPercentage(val) {
-  var isInRange = (val >= 0 && val <= 100);
-  return isInRange;
+    var isInRange = (val >= 0 && val <= 100);
+    return isInRange;
 }
 ```
 
@@ -405,7 +422,7 @@ grep your stack trace to find named function.
 
 ```js
 req.on('end', function onEnd() {
-  console.log('winning');
+    window.console.log('winning');
 });
 ```
 
@@ -413,7 +430,7 @@ req.on('end', function onEnd() {
 
 ```js
 req.on('end', function() {
-  console.log('losing');
+    window.console.log('losing');
 });
 ```
 
@@ -425,11 +442,11 @@ Use closures, but don't nest them. Otherwise your code will become a mess.
 
 ```js
 setTimeout(function() {
-  client.connect(afterConnect);
+    client.connect(afterConnect);
 }, 1000);
 
 function afterConnect() {
-  console.log('winning');
+    window.console.log('winning');
 }
 ```
 
@@ -437,9 +454,9 @@ function afterConnect() {
 
 ```js
 setTimeout(function() {
-  client.connect(function() {
-    console.log('losing');
-  });
+    client.connect(function() {
+        window.console.log('losing');
+    });
 }, 1000);
 ```
 
@@ -459,12 +476,12 @@ var matches = item.match(/ID_([^\n]+)=([^\n]+)/));
 // redis counter used for statistics will cause an exception. This needs
 // to be fixed in a later iteration.
 function loadUser(id, cb) {
-  // ...
+    // ...
 }
 
 var isSessionValid = (session.expires < Date.now());
 if (isSessionValid) {
-  // ...
+    // ...
 }
 ```
 
@@ -476,27 +493,17 @@ var matches = item.match(/ID_([^\n]+)=([^\n]+)/));
 
 // Usage: loadUser(5, function() { ... })
 function loadUser(id, cb) {
-  // ...
+    // ...
 }
 
 // Check if the session is valid
 var isSessionValid = (session.expires < Date.now());
 // If the session is valid
 if (isSessionValid) {
-  // ...
+    // ...
 }
 ```
 
 ## Object.freeze, Object.preventExtensions, Object.seal, with, eval
 
 Crazy shit that you will probably never need. Stay away from it.
-
-## Getters and setters
-
-Do not use setters, they cause more problems for people who try to use your
-software than they can solve.
-
-Feel free to use getters that are free from [side effects][sideeffect], like
-providing a length property for a collection class.
-
-[sideeffect]: http://en.wikipedia.org/wiki/Side_effect_(computer_science)
