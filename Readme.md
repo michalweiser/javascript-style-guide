@@ -117,7 +117,7 @@ The best way according to my personal experience is to declare one
 variable at the top of function scope (C/C++ like style) without any
 initializations to prevent mixed line ordering. And afterwards initialize
 values wherever you want. This rule generates more code, but you should
-never end up with strange hoisitng problems.
+never end up with strange hoisting problems.
 
 *Right:*
 
