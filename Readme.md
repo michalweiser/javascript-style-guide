@@ -37,8 +37,6 @@ you a lot of future headaches caused by strange errors.
 *Right:*
 
 ```js
-var obj;
-
 obj = {
     a: "a",
     b: "b"
@@ -48,8 +46,6 @@ obj = {
 *Wrong:*
 
 ```js
-var obj;
-
 obj = {
     a: "a",
     b: "b",
@@ -161,7 +157,6 @@ while (keys.length) {
 ### Use lower_case_underscore convention for variables and properties
 
 ```js
-var my_string, b;
 my_string = 'hello';
 b = {
     my_prop: 10
@@ -170,13 +165,10 @@ b = {
 
 ### Use $ prefix in case of jQuery object variable
 ```js
-var $input_box;
 $input_box = jQuery('input.box');
 ```
 ### Use lowerCamelCase for functions and methods
 ```js
-var myFunction, obj;
-
 myFunction = function () {
     return 'function';
 };
@@ -189,8 +181,6 @@ obj = {
 ```
 ### Use UpperCamelCase for classes
 ```js
-var MyClass, a;
-
 MyClass = function () {
     //constructor
 };
@@ -205,8 +195,6 @@ using all uppercase letters.
 *Right:*
 
 ```js
-var File, SECOND;
-
 SECOND = 1 * 1000;
 
 File = function () {
@@ -219,7 +207,7 @@ File.FULL_PERMISSIONS = 0777;
 *Wrong:*
 
 ```js
-var second = 1 * 1000;
+second = 1 * 1000;
 
 function File() {
 
@@ -246,8 +234,6 @@ interface, let, package, private, protected, public, static, yield
 *Right:*
 
 ```js
-var a, b;
-
 a = [
     'hello',
     'world'
@@ -262,10 +248,10 @@ b = {
 *Wrong:*
 
 ```js
-var a = ['hello', 'world',];
-var b = {"good": 'code'
-        , is generally: 'pretty'
-        };
+a = ['hello', 'world',];
+b = {"good": 'code'
+    , is generally: 'pretty'
+    };
 ```
 
 [ecmadocs]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf
@@ -279,8 +265,6 @@ use double equality operator always leave comment why you're doing it.
 *Right:*
 
 ```js
-var a;
-
 a = 0;
 
 if (a !== '') {
@@ -292,8 +276,6 @@ if (a !== '') {
 *Wrong:*
 
 ```js
-var a = 0;
-
 if (a == '') {
     window.console.log('losing');
 }
@@ -310,8 +292,6 @@ missing functionality in older browsers ([polyfills][polyfillswiki]).
 *Right:*
 
 ```js
-var a;
-
 a = [];
 
 if (!a.length) {
@@ -326,7 +306,7 @@ Array.prototype.empty = function() {
     return !this.length;
 }
 
-var a = [];
+a = [];
 
 if (a.empty()) {
     window.console.log('losing');
@@ -342,8 +322,6 @@ Any non-trivial conditions should be assigned to a descriptively named variable 
 *Right:*
 
 ```js
-var isValidPassword;
-
 isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
 
 if (isValidPassword) {
@@ -407,7 +385,9 @@ further:
 
 ```js
 function isPercentage(val) {
-    var isInRange = (val >= 0 && val <= 100);
+    var isInRange;
+
+    isInRange = (val >= 0 && val <= 100);
     return isInRange;
 }
 ```
