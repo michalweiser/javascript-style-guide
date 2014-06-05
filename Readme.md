@@ -5,7 +5,7 @@ It is inspired by what is popular within the community, and flavored with some
 personal opinions.
 
 This guide was created by [Felix Geisendörfer](http://felixge.de/), edited by
-[Michał Weiser][https://plus.google.com/+MichałWeiser/] and is
+[Michał Weiser](https://plus.google.com/+MichałWeiser/) and is
 licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 license. You are encouraged to fork this repository and make adjustments
 according to your preferences.
